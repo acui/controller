@@ -17,3 +17,4 @@ CalcClearEntry        => Calc_clearEntry_capability();
 CalcMode              => Calc_mode_capability( mode : 1 );
 CalcDuplicate         => Calc_duplicate_capability();
 CalcPop               => Calc_pop_capability();
+CalcRotate            => Calc_rotate_capability();
