@@ -34,6 +34,7 @@
 #include <matrix_scan.h>
 #include <macro.h>
 #include <output_com.h>
+#include <calc.h>
 
 // Local Includes
 #include "scan_loop.h"
@@ -63,6 +64,8 @@ inline void Scan_setup()
 
 	// Setup the ST/NHD lcd display
 	LCD_setup();
+
+	Calc_setup();
 
 	// Reset scan count
 	Scan_scanCount = 0;

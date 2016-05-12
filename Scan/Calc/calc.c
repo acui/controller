@@ -529,7 +529,7 @@ void Calc_unaryOperator(uint8_t operator)
 		Calc_error( "Too few elements on stack" );
 		return;
 	}
-	switch ( operator )
+88	switch ( operator )
 	{
 	case '~':
 		CalcStack[ CalcStackTop - 1 ] = ~CalcStack[ CalcStackTop - 1];
@@ -597,11 +597,13 @@ void Calc_ternaryOperator(uint8_t operator)
 
 void Calc_initialize()
 {
+	STLcd_clear();
 	CalcHasCurrentNumber = 0;
 	CalcStackTop = 0;
 	CalcLineMax = ( LCD_HEIGHT - CalcFontHeight ) / CalcLineHeight + 1;
 	CalcColumnMax = ( LCD_WIDTH - CalcFontWidth ) / ( CalcFontWidth + CalcLetterSpace ) + 1;
 	CalcStackDispOffset = 0;
+	memset( CalcOutputBuffer, 0x20, CalcColumnMax );
 #if defined(ConnectEnabled_define)
 	if ( Connect_master )
 	{
@@ -700,7 +702,7 @@ void Calc_initialize_capability( uint8_t state, uint8_t stateType, uint8_t *args
 	}
 
 	Calc_initialize();
-#if defined(ConnectEnabled_define)
+/*#if defined(ConnectEnabled_define)
 	if ( Connect_master )
 	{
 		// generatedKeymap.h
@@ -716,7 +718,7 @@ void Calc_initialize_capability( uint8_t state, uint8_t stateType, uint8_t *args
 			0
 		);
 	}
-#endif
+	#endif*/
 }
 
 void Calc_enter_capability( uint8_t state, uint8_t stateType, uint8_t *args )
@@ -729,7 +731,7 @@ void Calc_enter_capability( uint8_t state, uint8_t stateType, uint8_t *args )
 	}
 
 	Calc_enter();
-#if defined(ConnectEnabled_define)
+/*#if defined(ConnectEnabled_define)
 	if ( Connect_master )
 	{
 		// generatedKeymap.h
@@ -745,7 +747,7 @@ void Calc_enter_capability( uint8_t state, uint8_t stateType, uint8_t *args )
 			0
 		);
 	}
-#endif
+	#endif*/
 }
 
 void Calc_clear_capability( uint8_t state, uint8_t stateType, uint8_t *args )
@@ -758,7 +760,7 @@ void Calc_clear_capability( uint8_t state, uint8_t stateType, uint8_t *args )
 	}
 
 	Calc_clear();
-#if defined(ConnectEnabled_define)
+/*#if defined(ConnectEnabled_define)
 	if ( Connect_master )
 	{
 		// generatedKeymap.h
@@ -774,7 +776,7 @@ void Calc_clear_capability( uint8_t state, uint8_t stateType, uint8_t *args )
 			0
 		);
 	}
-#endif
+	#endif*/
 }
 
 void Calc_clearEntry_capability( uint8_t state, uint8_t stateType, uint8_t *args )
@@ -787,7 +789,7 @@ void Calc_clearEntry_capability( uint8_t state, uint8_t stateType, uint8_t *args
 	}
 
 	Calc_clearEntry();
-#if defined(ConnectEnabled_define)
+/*#if defined(ConnectEnabled_define)
 	if ( Connect_master )
 	{
 		// generatedKeymap.h
@@ -803,7 +805,7 @@ void Calc_clearEntry_capability( uint8_t state, uint8_t stateType, uint8_t *args
 			0
 		);
 	}
-#endif
+	#endif*/
 }
 
 void Calc_duplicate_capability( uint8_t state, uint8_t stateType, uint8_t *args )
@@ -816,7 +818,7 @@ void Calc_duplicate_capability( uint8_t state, uint8_t stateType, uint8_t *args 
 	}
 
 	Calc_duplicate();
-#if defined(ConnectEnabled_define)
+/*#if defined(ConnectEnabled_define)
 	if ( Connect_master )
 	{
 		// generatedKeymap.h
@@ -832,7 +834,7 @@ void Calc_duplicate_capability( uint8_t state, uint8_t stateType, uint8_t *args 
 			0
 		);
 	}
-#endif
+	#endif*/
 }
 
 void Calc_pop_capability( uint8_t state, uint8_t stateType, uint8_t *args )
@@ -845,7 +847,7 @@ void Calc_pop_capability( uint8_t state, uint8_t stateType, uint8_t *args )
 	}
 
 	Calc_pop();
-#if defined(ConnectEnabled_define)
+/*#if defined(ConnectEnabled_define)
 	if ( Connect_master )
 	{
 		// generatedKeymap.h
@@ -861,7 +863,7 @@ void Calc_pop_capability( uint8_t state, uint8_t stateType, uint8_t *args )
 			0
 		);
 	}
-#endif
+	#endif*/
 }
 
 void Calc_swap_capability( uint8_t state, uint8_t stateType, uint8_t *args )
@@ -874,7 +876,7 @@ void Calc_swap_capability( uint8_t state, uint8_t stateType, uint8_t *args )
 	}
 
 	Calc_swap();
-#if defined(ConnectEnabled_define)
+/*#if defined(ConnectEnabled_define)
 	if ( Connect_master )
 	{
 		// generatedKeymap.h
@@ -890,7 +892,7 @@ void Calc_swap_capability( uint8_t state, uint8_t stateType, uint8_t *args )
 			0
 		);
 	}
-#endif
+	#endif*/
 }
 
 void Calc_rotate_capability( uint8_t state, uint8_t stateType, uint8_t *args )
@@ -903,7 +905,7 @@ void Calc_rotate_capability( uint8_t state, uint8_t stateType, uint8_t *args )
 	}
 
 	Calc_rotate();
-#if defined(ConnectEnabled_define)
+/*#if defined(ConnectEnabled_define)
 	if ( Connect_master )
 	{
 		// generatedKeymap.h
@@ -919,7 +921,7 @@ void Calc_rotate_capability( uint8_t state, uint8_t stateType, uint8_t *args )
 			0
 		);
 	}
-#endif
+	#endif*/
 }
 
 void Calc_char_capability( uint8_t state, uint8_t stateType, uint8_t *args )
@@ -932,7 +934,7 @@ void Calc_char_capability( uint8_t state, uint8_t stateType, uint8_t *args )
 	}
 	uint8_t c = *args;
 	Calc_char( c );
-#if defined(ConnectEnabled_define)
+/*#if defined(ConnectEnabled_define)
 	if ( Connect_master )
 	{
 		// generatedKeymap.h
@@ -948,7 +950,7 @@ void Calc_char_capability( uint8_t state, uint8_t stateType, uint8_t *args )
 			args
 		);
 	}
-#endif
+	#endif*/
 }
 
 void Calc_unaryOperator_capability( uint8_t state, uint8_t stateType, uint8_t *args )
@@ -961,7 +963,7 @@ void Calc_unaryOperator_capability( uint8_t state, uint8_t stateType, uint8_t *a
 	}
 	uint8_t c = *args;
 	Calc_unaryOperator( c );
-#if defined(ConnectEnabled_define)
+/*#if defined(ConnectEnabled_define)
 	if ( Connect_master )
 	{
 		// generatedKeymap.h
@@ -977,7 +979,7 @@ void Calc_unaryOperator_capability( uint8_t state, uint8_t stateType, uint8_t *a
 			args
 		);
 	}
-#endif
+	#endif*/
 }
 
 void Calc_binaryOperator_capability( uint8_t state, uint8_t stateType, uint8_t *args )
@@ -990,7 +992,7 @@ void Calc_binaryOperator_capability( uint8_t state, uint8_t stateType, uint8_t *
 	}
 	uint8_t c = *args;
 	Calc_binaryOperator( c );
-#if defined(ConnectEnabled_define)
+/*#if defined(ConnectEnabled_define)
 	if ( Connect_master )
 	{
 		// generatedKeymap.h
@@ -1006,7 +1008,7 @@ void Calc_binaryOperator_capability( uint8_t state, uint8_t stateType, uint8_t *
 			args
 		);
 	}
-#endif
+	#endif*/
 }
 
 void Calc_ternaryOperator_capability( uint8_t state, uint8_t stateType, uint8_t *args )
@@ -1019,7 +1021,7 @@ void Calc_ternaryOperator_capability( uint8_t state, uint8_t stateType, uint8_t 
 	}
 	uint8_t c = *args;
 	Calc_ternaryOperator( c );
-#if defined(ConnectEnabled_define)
+/*#if defined(ConnectEnabled_define)
 	if ( Connect_master )
 	{
 		// generatedKeymap.h
@@ -1035,7 +1037,7 @@ void Calc_ternaryOperator_capability( uint8_t state, uint8_t stateType, uint8_t 
 			args
 		);
 	}
-#endif
+	#endif*/
 }
 
 void Calc_mode_capability( uint8_t state, uint8_t stateType, uint8_t *args )
@@ -1048,7 +1050,7 @@ void Calc_mode_capability( uint8_t state, uint8_t stateType, uint8_t *args )
 	}
 	uint8_t c = *args;
 	Calc_mode( c );
-#if defined(ConnectEnabled_define)
+/*#if defined(ConnectEnabled_define)
 	if ( Connect_master )
 	{
 		// generatedKeymap.h
@@ -1064,14 +1066,19 @@ void Calc_mode_capability( uint8_t state, uint8_t stateType, uint8_t *args )
 			args
 		);
 	}
-#endif
+	#endif*/
+}
+
+inline void Calc_setup()
+{
+	CLI_registerDictionary( calcCLIDict, calcCLIDictName );
 }
 
 
 
 // ----- CLI Command Functions -----
 
-void cliFunc_initialize ( char* args )
+void cliFunc_calcInitialize ( char* args )
 {
 	Calc_initialize();
 }

@@ -38,6 +38,7 @@ PartialMaps[4]="acuiergo_layer4 lcdFuncMap"
 PartialMaps[5]="acuiergo_layer5 lcdFuncMap"
 PartialMaps[6]="acuiergo_layer6 lcdFuncMap"
 PartialMaps[7]="acuiergo_layer7 lcdFuncMap"
+PartialMaps[8]="acuiergo_layer8 lcdFuncMap"
 
 
 

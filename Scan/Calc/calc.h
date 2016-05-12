@@ -21,3 +21,4 @@
 #include <stdint.h>
 
 // ----- Functions -----
+void Calc_setup();
