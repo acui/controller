@@ -21,7 +21,9 @@
 // Compiler Includes
 #include <stdint.h>
 
-
+// ----- Defines -----
+#define LCD_WIDTH 128
+#define LCD_HEIGHT 32
 
 // ----- Functions -----
 
@@ -31,3 +33,5 @@ uint8_t LCD_scan();
 void LCD_currentChange( unsigned int current );
 
 void STLcd_drawBitmap( const uint8_t *bitmap, uint8_t x, uint8_t y, uint8_t width, uint8_t height );
+void STLcd_updateBoundingBox( uint8_t xmin, uint8_t ymin, uint8_t xmax, uint8_t ymax );
+void STLcd_clear();

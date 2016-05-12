@@ -9,7 +9,6 @@
 ###
 # Required Sub-modules
 #
-AddModule ( Macro PartialMap )
 AddModule ( Scan STLcd )
 
 ###

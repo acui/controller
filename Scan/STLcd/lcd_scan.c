@@ -38,8 +38,7 @@
 #define LCD_TOTAL_VISIBLE_PAGES 4
 #define LCD_TOTAL_PAGES 9
 #define LCD_PAGE_LEN 128
-#define LCD_WIDTH 128
-#define LCD_HEIGHT 32
+
 
 
 // ----- Macros -----
@@ -368,7 +367,7 @@ static uint8_t STLcdUpdateXMin = LCD_WIDTH, STLcdUpdateXMax = 0, STLcdUpdateYMin
 static uint8_t STLcdSync = 0;
 static uint8_t STLcdSyncPageMin, STLcdSyncPageMax, STLcdSyncColumnMin, STLcdSyncColumnMax;
 
-static void STLcd_updateBoundingBox( uint8_t xmin, uint8_t ymin, uint8_t xmax, uint8_t ymax ) {
+void STLcd_updateBoundingBox( uint8_t xmin, uint8_t ymin, uint8_t xmax, uint8_t ymax ) {
 	if ( xmin < STLcdUpdateXMin ) STLcdUpdateXMin = xmin;
 	if ( xmax > STLcdUpdateXMax ) STLcdUpdateXMax = xmax;
 	if ( ymin < STLcdUpdateYMin ) STLcdUpdateYMin = ymin;

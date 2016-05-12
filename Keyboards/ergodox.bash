@@ -46,7 +46,7 @@ PartialMaps[2]="iced_numpad"
 
 # Keyboard Module Configuration
 ScanModule="MDErgo1"
-MacroModule="CalcMap"
+MacroModule="PartialMap"
 OutputModule="pjrcUSB"
 DebugModule="full"
 
