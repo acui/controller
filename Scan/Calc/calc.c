@@ -529,7 +529,7 @@ void Calc_unaryOperator(uint8_t operator)
 		Calc_error( "Too few elements on stack" );
 		return;
 	}
-88	switch ( operator )
+	switch ( operator )
 	{
 	case '~':
 		CalcStack[ CalcStackTop - 1 ] = ~CalcStack[ CalcStackTop - 1];
