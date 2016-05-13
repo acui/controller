@@ -1,4 +1,5 @@
 /* Copyright (C) 2016 by Cui Yuting
+ * Copyright (C) 2015-2016 by Jacob Alexander
  *
  * This file is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -607,11 +608,13 @@ void Calc_ternaryOperator(uint8_t operator)
 
 void Calc_initialize()
 {
+	STLcd_clear();
 	CalcHasCurrentNumber = 0;
 	CalcStackTop = 0;
 	CalcLineMax = ( LCD_HEIGHT - CalcFontHeight ) / CalcLineHeight + 1;
 	CalcColumnMax = ( LCD_WIDTH - CalcFontWidth ) / ( CalcFontWidth + CalcLetterSpace ) + 1;
 	CalcStackDispOffset = 0;
+	memset( CalcOutputBuffer, 0x20, CalcColumnMax );
 #if defined(ConnectEnabled_define)
 	if ( Connect_master )
 	{
@@ -709,6 +712,14 @@ void Calc_initialize_capability( uint8_t state, uint8_t stateType, uint8_t *args
 		return;
 	}
 
+	if ( stateType == 0x00 )
+	{
+		if ( state != 0x01 )
+		{
+			return;
+		}
+	}
+
 	Calc_initialize();
 #if defined(ConnectEnabled_define)
 	if ( Connect_master )
@@ -736,6 +747,14 @@ void Calc_enter_capability( uint8_t state, uint8_t stateType, uint8_t *args )
 	{
 		print("Calc_enter_capability()");
 		return;
+	}
+
+	if ( stateType == 0x00 )
+	{
+		if ( state != 0x01 )
+		{
+			return;
+		}
 	}
 
 	Calc_enter();
@@ -767,6 +786,14 @@ void Calc_clear_capability( uint8_t state, uint8_t stateType, uint8_t *args )
 		return;
 	}
 
+	if ( stateType == 0x00 )
+	{
+		if ( state != 0x01 )
+		{
+			return;
+		}
+	}
+
 	Calc_clear();
 #if defined(ConnectEnabled_define)
 	if ( Connect_master )
@@ -794,6 +821,14 @@ void Calc_clearEntry_capability( uint8_t state, uint8_t stateType, uint8_t *args
 	{
 		print("Calc_clearEntry_capability()");
 		return;
+	}
+
+	if ( stateType == 0x00 )
+	{
+		if ( state != 0x01 )
+		{
+			return;
+		}
 	}
 
 	Calc_clearEntry();
@@ -825,6 +860,14 @@ void Calc_duplicate_capability( uint8_t state, uint8_t stateType, uint8_t *args 
 		return;
 	}
 
+	if ( stateType == 0x00 )
+	{
+		if ( state != 0x01 )
+		{
+			return;
+		}
+	}
+
 	Calc_duplicate();
 #if defined(ConnectEnabled_define)
 	if ( Connect_master )
@@ -852,6 +895,14 @@ void Calc_pop_capability( uint8_t state, uint8_t stateType, uint8_t *args )
 	{
 		print("Calc_pop_capability()");
 		return;
+	}
+
+	if ( stateType == 0x00 )
+	{
+		if ( state != 0x01 )
+		{
+			return;
+		}
 	}
 
 	Calc_pop();
@@ -883,6 +934,14 @@ void Calc_swap_capability( uint8_t state, uint8_t stateType, uint8_t *args )
 		return;
 	}
 
+	if ( stateType == 0x00 )
+	{
+		if ( state != 0x01 )
+		{
+			return;
+		}
+	}
+
 	Calc_swap();
 #if defined(ConnectEnabled_define)
 	if ( Connect_master )
@@ -910,6 +969,14 @@ void Calc_rotate_capability( uint8_t state, uint8_t stateType, uint8_t *args )
 	{
 		print("Calc_rotate_capability()");
 		return;
+	}
+
+	if ( stateType == 0x00 )
+	{
+		if ( state != 0x01 )
+		{
+			return;
+		}
 	}
 
 	Calc_rotate();
@@ -940,6 +1007,15 @@ void Calc_char_capability( uint8_t state, uint8_t stateType, uint8_t *args )
 		print("Calc_char_capability(c)");
 		return;
 	}
+
+	if ( stateType == 0x00 )
+	{
+		if ( state != 0x01 )
+		{
+			return;
+		}
+	}
+
 	uint8_t c = *args;
 	Calc_char( c );
 #if defined(ConnectEnabled_define)
@@ -969,6 +1045,15 @@ void Calc_unaryOperator_capability( uint8_t state, uint8_t stateType, uint8_t *a
 		print("Calc_unaryOperator_capability(operator)");
 		return;
 	}
+
+	if ( stateType == 0x00 )
+	{
+		if ( state != 0x01 )
+		{
+			return;
+		}
+	}
+
 	uint8_t c = *args;
 	Calc_unaryOperator( c );
 #if defined(ConnectEnabled_define)
@@ -998,6 +1083,15 @@ void Calc_binaryOperator_capability( uint8_t state, uint8_t stateType, uint8_t *
 		print("Calc_binaryOperator_capability(operator)");
 		return;
 	}
+
+	if ( stateType == 0x00 )
+	{
+		if ( state != 0x01 )
+		{
+			return;
+		}
+	}
+
 	uint8_t c = *args;
 	Calc_binaryOperator( c );
 #if defined(ConnectEnabled_define)
@@ -1027,6 +1121,15 @@ void Calc_ternaryOperator_capability( uint8_t state, uint8_t stateType, uint8_t 
 		print("Calc_ternaryOperator_capability(operator)");
 		return;
 	}
+
+	if ( stateType == 0x00 )
+	{
+		if ( state != 0x01 )
+		{
+			return;
+		}
+	}
+
 	uint8_t c = *args;
 	Calc_ternaryOperator( c );
 #if defined(ConnectEnabled_define)
@@ -1056,6 +1159,15 @@ void Calc_mode_capability( uint8_t state, uint8_t stateType, uint8_t *args )
 		print("Calc_mode_capability(mode)");
 		return;
 	}
+
+	if ( stateType == 0x00 )
+	{
+		if ( state != 0x01 )
+		{
+			return;
+		}
+	}
+
 	uint8_t c = *args;
 	Calc_mode( c );
 #if defined(ConnectEnabled_define)
@@ -1077,11 +1189,16 @@ void Calc_mode_capability( uint8_t state, uint8_t stateType, uint8_t *args )
 #endif
 }
 
+inline void Calc_setup()
+{
+	CLI_registerDictionary( calcCLIDict, calcCLIDictName );
+}
+
 
 
 // ----- CLI Command Functions -----
 
-void cliFunc_initialize ( char* args )
+void cliFunc_calcInitialize ( char* args )
 {
 	Calc_initialize();
 }
