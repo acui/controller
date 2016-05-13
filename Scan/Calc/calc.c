@@ -316,6 +316,7 @@ void Calc_pop()
 	if ( CalcStackTop > 0 )
 	{
 		CalcStackTop--;
+		STLcd_clear();
 		Calc_outputStacks();
 		Calc_outputCurrentNumber();
 	}
@@ -390,6 +391,7 @@ void Calc_duplicate()
 	{
 		CalcStack[ CalcStackTop ] = CalcStack[ CalcStackTop - 1 ];
 		CalcStackTop++;
+		STLcd_clear();
 		Calc_outputStacks();
 	}
 	else
@@ -424,6 +426,7 @@ void Calc_push()
 {
 	if ( Calc_pushImp() )
 	{
+		STLcd_clear();
 		Calc_outputStacks();
 		Calc_outputCurrentNumber();
 	}
@@ -445,6 +448,7 @@ void Calc_clear()
 {
 	CalcStackTop = 0;
 	CalcHasCurrentNumber = 0;
+	STLcd_clear();
 	Calc_outputStacks();
 	Calc_outputCurrentNumber();
 }
@@ -468,6 +472,7 @@ void Calc_swap()
 		CalcStack[ CalcStackTop - 1] = CalcStack[ CalcStackTop - 2];
 		CalcStack[ CalcStackTop - 2] = t;
 	}
+	STLcd_clear();
 	Calc_outputStacks();
 	Calc_outputCurrentNumber();
 }
@@ -485,6 +490,7 @@ void Calc_rotate()
 		CalcStack[ CalcStackTop - 1] = CalcStack[ CalcStackTop - 3];
 		CalcStack[ CalcStackTop - 3] = CalcStack[ CalcStackTop - 2];
 		CalcStack[ CalcStackTop - 2] = t;
+		STLcd_clear();
 		Calc_outputStacks();
 		Calc_outputCurrentNumber();
 	}
@@ -515,6 +521,7 @@ void Calc_mode( uint8_t mode )
 		CalcCurrentMaxLength = 10;
 		break;
 	}
+	STLcd_clear();
 	Calc_outputStacks();
 	Calc_outputCurrentNumber();
 }
@@ -535,6 +542,7 @@ void Calc_unaryOperator(uint8_t operator)
 		CalcStack[ CalcStackTop - 1 ] = ~CalcStack[ CalcStackTop - 1];
 		break;
 	}
+	STLcd_clear();
 	Calc_outputStacks();
 	Calc_outputCurrentNumber();
 }
@@ -577,6 +585,7 @@ void Calc_binaryOperator(uint8_t operator)
 		CalcStack[ CalcStackTop - 2 ] ^= CalcStack[ CalcStackTop - 1];
 	}
 	CalcStackTop--;
+	STLcd_clear();
 	Calc_outputStacks();
 	Calc_outputCurrentNumber();
 }
@@ -591,6 +600,7 @@ void Calc_ternaryOperator(uint8_t operator)
 		Calc_error( "Too few elements on stack" );
 		return;
 	}
+	STLcd_clear();
 	Calc_outputStacks();
 	Calc_outputCurrentNumber();
 }
