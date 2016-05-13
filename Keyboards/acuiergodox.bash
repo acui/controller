@@ -23,7 +23,7 @@ BaseMap="defaultMap leftHand slave1 rightHand"
 # This is the default layer of the keyboard
 # NOTE: To combine kll files into a single layout, separate them by spaces
 # e.g.  DefaultMap="mylayout mylayoutmod"
-DefaultMap="acuiergobase lcdFuncMap"
+DefaultMap="acuiergo_base lcdFuncMap"
 
 # This is where you set the additional layers
 # NOTE: Indexing starts at 1
@@ -38,7 +38,7 @@ PartialMaps[4]="acuiergo_layer4 lcdFuncMap"
 PartialMaps[5]="acuiergo_layer5 lcdFuncMap"
 PartialMaps[6]="acuiergo_layer6 lcdFuncMap"
 PartialMaps[7]="acuiergo_layer7 lcdFuncMap"
-PartialMaps[8]="acuiergo_layer8 lcdFuncMap"
+PartialMaps[8]="acuiergo_calc lcdFuncMap rpnCalcFuncMap"
 
 
 
