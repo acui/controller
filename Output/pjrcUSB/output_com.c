@@ -137,9 +137,11 @@ USBMouseChangeState USBMouse_Changed = 0;
 
 // the idle configuration, how often we send the report to the
 // host (ms * 4) even when it hasn't changed
-uint8_t  USBKeys_Idle_Config = 125;
+// 0 - Disables
+uint8_t  USBKeys_Idle_Config = 0;
 
-// count until idle timeout
+// Count until idle timeout
+uint32_t USBKeys_Idle_Expiry = 0;
 uint8_t  USBKeys_Idle_Count = 0;
 
 // Indicates whether the Output module is fully functional
@@ -215,6 +217,28 @@ void Output_kbdProtocolNKRO_capability( uint8_t state, uint8_t stateType, uint8_
 
 	// Set the keyboard protocol to NKRO Mode
 	USBKeys_Protocol = 1;
+}
+
+
+// Toggle Keyboard Protocol
+void Output_toggleKbdProtocol_capability( uint8_t state, uint8_t stateType, uint8_t *args )
+{
+	// Display capability name
+	if ( stateType == 0xFF && state == 0xFF )
+	{
+		print("Output_toggleKbdProtocol()");
+		return;
+	}
+
+	// Only toggle protocol if release state
+	if ( stateType == 0x00 && state == 0x03 )
+	{
+		// Flush the key buffers
+		Output_flushBuffers();
+
+		// Toggle the keyboard protocol Mode
+		USBKeys_Protocol = !USBKeys_Protocol;
+	}
 }
 
 
@@ -624,6 +648,19 @@ inline void Output_send()
 		for ( uint8_t c = USBKeys_Sent; c < USB_BOOT_MAX_KEYS; c++ )
 			USBKeys_Keys[c] = 0;
 
+	// XXX - Behaves oddly on Mac OSX, might help with corrupted packets specific to OSX? -HaaTa
+	/*
+	// Check if idle count has been exceed, this forces usb_keyboard_send and usb_mouse_send to update
+	// TODO Add joystick as well (may be endpoint specific, currently not kept track of)
+	if ( usb_configuration && USBKeys_Idle_Config && (
+		USBKeys_Idle_Expiry < systick_millis_count ||
+		USBKeys_Idle_Expiry + USBKeys_Idle_Config * 4 >= systick_millis_count ) )
+	{
+		USBKeys_Changed = USBKeyChangeState_All;
+		USBMouse_Changed = USBMouseChangeState_All;
+	}
+	*/
+
 	// Process mouse actions
 	while ( USBMouse_Changed )
 		usb_mouse_send();
@@ -713,10 +750,12 @@ void Output_update_usb_current( unsigned int current )
 	// Update USB current
 	Output_USBCurrent_Available = current;
 
+	/* XXX Affects sleep states due to USB messages
 	unsigned int total_current = Output_current_available();
 	info_msg("USB Available Current Changed. Total Available: ");
 	printInt32( total_current );
 	print(" mA" NL);
+	*/
 
 	// Send new total current to the Scan Modules
 	Scan_currentChange( Output_current_available() );
