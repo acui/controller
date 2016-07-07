@@ -18,7 +18,7 @@ BuildPath="ICED-L"
 ## KLL Configuration ##
 
 # Generally shouldn't be changed, this will affect every layer
-BaseMap="defaultMap leftHand slave1 rightHand"
+BaseMap="scancode_map leftHand slave1 rightHand"
 
 # This is the default layer of the keyboard
 # NOTE: To combine kll files into a single layout, separate them by spaces
@@ -95,7 +95,7 @@ BuildPath="ICED-R"
 
 # Only changing the basemap (everything else is the same)
 # Generally shouldn't be changed, this will affect every layer
-BaseMap="defaultMap rightHand slave1 leftHand"
+BaseMap="scancode_map rightHand slave1 leftHand"
 
 # Load the library (starts the build)
 source cmake.bash
