@@ -219,6 +219,7 @@ void Connect_addBytes( uint8_t *buffer, uint8_t count, uint8_t uart )
 		printInt8( uart );
 		print( ", waiting..." NL );
 		delay( 1 );
+		// FIXME Buffer will not drain here....
 	}
 
 	// Append data to ring buffer
@@ -687,7 +688,7 @@ uint8_t Connect_receive_ScanCode( uint8_t byte, uint16_t *pending_bytes, uint8_t
 			}
 
 			// Send ScanCode to macro module
-			Macro_interconnectAdd( &Connect_receive_ScanCodeBuffer );
+			Macro_pressReleaseAdd( &Connect_receive_ScanCodeBuffer );
 		}
 
 		break;

@@ -1,4 +1,4 @@
-/* Copyright (C) 2012,2014-2016 by Jacob Alexander
+/* Copyright (C) 2016 by Jacob Alexander
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,42 +23,13 @@
 
 // ----- Includes -----
 
-// Compiler Includes
-#include <stdint.h>
-
-// Local Includes
-
-
-
-// ----- Defines -----
-
-#define KEYBOARD_KEYS 0x7F // 127 - Size of the array space for the keyboard(max index)
-#define KEYBOARD_BUFFER 24 // Max number of key signals to buffer
-
-
-
-// ----- Variables -----
-
-extern volatile     uint8_t KeyIndex_Buffer[KEYBOARD_BUFFER];
-extern volatile     uint8_t KeyIndex_BufferUsed;
-extern volatile     uint8_t KeyIndex_Add_InputSignal;
+#include "usb_desc.h"
 
 
 
 // ----- Functions -----
 
-// Functions used by main.c
-void Scan_setup();
-uint8_t Scan_loop();
-
-
-// Functions available to macro.c
-uint8_t Scan_sendData( uint8_t dataPayload );
-
-void Scan_finishedWithMacro( uint8_t sentKeys );
-void Scan_finishedWithOutput( uint8_t sentKeys );
-void Scan_lockKeyboard();
-void Scan_unlockKeyboard();
-void Scan_resetKeyboard();
-void Scan_currentChange( unsigned int current );
+uint32_t usb_rawio_available();
+int32_t  usb_rawio_rx( void *buf, uint32_t timeout );
+int32_t  usb_rawio_tx( const void *buf, uint32_t timeout );
 
