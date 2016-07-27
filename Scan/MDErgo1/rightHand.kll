@@ -57,5 +57,4 @@ S0x28 : U"Left";
 S0x29 : U"Down";
 S0x2A : U"Up";
 S0x2B : U"Right";
-S0x2C : U"RGui";
-
+S0x2C : U"Function8";
